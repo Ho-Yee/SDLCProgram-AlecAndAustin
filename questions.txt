@@ -1,0 +1,60 @@
+1
+What does "SDLC" stand for?
+Software Development Life Cycle
+Super Dope Learning Commons
+Software Development Learning Cycle
+Software Development Lifetime Commitment
+2
+What is a system?
+A combination of software and hardware that provides a solution for a business problem
+A personal computer
+A mathematical equation used to solve computer science problems
+A group of people working together on a problem
+3
+What is a Gantt Chart used for?
+To keep track of the completion of required tasks
+To design structures
+To track finances
+To measure the length of the SDLC
+4
+What model is commonly used to describe the SDLC
+The Waterfall Model
+The Gantt Model
+The Interstate Model
+The Snowflake Model
+5
+What area costs the most out of the stages of development?
+Maintenance
+Implementation
+Integration
+Design
+6
+How can success be measured quantitatively?
+By answering questions such as "Does the project do what it was meant to do?"
+By recording the time taken to complete tasks
+By asking coworkers
+By test-running code at the end of the day
+7
+Who invented the Gantt Chart? When?
+Henry Gantt in the 1910's
+Mr. Cutten in 2012
+The Massachusetts Institute of Technology in 1800
+Harry Gantt in the 1910's
+8
+When is the cost of correcting an issue the greatest?
+After the system has been published
+While testing code
+Before beginning the project
+During the design phase
+9
+Who invented the Waterfall Model?
+Dr. Winston Royce
+Mr. Water Fall
+Austin
+Dr. Whitney Royce
+10
+What is required to create high quality software?
+Organization, planning, and collaboration
+Money
+Organization and time
+Collaboration with others

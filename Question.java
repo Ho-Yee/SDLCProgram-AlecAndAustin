@@ -3,7 +3,6 @@
  * November 28th 2018
  * Definition of a question, allows question object to be created and allows user to access and mutate all attributes of the question
  */
-package questionsclass;
 
 /**
  *

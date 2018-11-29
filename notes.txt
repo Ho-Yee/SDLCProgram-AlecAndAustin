@@ -5,7 +5,7 @@ A system is a combination of software and hardware that provides a solution for 
 2
 A system involves: "The Client", "Analysts", "Designers", "Testers", "Users", and possibly others
 3
-A Gantt chart is sued to keep track of the completion of different tasks required for the project
+A Gantt chart is used to keep track of the completion of different tasks required for the project
 1
 Success can be measured by answering questions such as: "Does the project do what it was meant to do?", "Is it easy to administer?", and "Was it delivered on time and ready to go?"
 4

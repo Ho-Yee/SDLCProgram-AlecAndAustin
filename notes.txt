@@ -21,7 +21,7 @@ The "Waterfall Method" consists of 6 phases: "Problem Statement", "Analysis", "D
 1
 The cost of correcting an issue early in the process is much less than doing so later on
 1
-The cost of development is not spread equally over the phases
+The cost of development is not spread equally over the phases. Almost 70% of the cost is required by Maintenance after publishing.
 3
 The Gantt chart was developed by Henry Gantt in the 1910's
 3

@@ -1,0 +1,28 @@
+1
+SDLC stands for "Software Development Life Cycle"
+2
+A system is a combination of software and hardware that provides a solution for a business problem
+2
+A system involves: "The Client", "Analysts", "Designers", "Testers", "Users", and possibly others
+3
+A Gantt chart is sued to keep track of the completion of different tasks required for the project
+1
+Success can be measured by answering questions such as: "Does the project do what it was meant to do?", "Is it easy to administer?", and "Was it delivered on time and ready to go?"
+4
+The SDLC can be visualized using the "Waterfall Model"
+4
+The "Waterfall Model" was developed by Dr. Winston Royce
+1
+Creating high quality software requires organization, planning, and collaboration
+1
+Computer Scientists created an overview of the design process which they called "SDLC"
+4
+The "Waterfall Method" consists of 6 phases: "Problem Statement", "Analysis", "Design", "Implementation", "Integration", and "Maintenance"
+1
+The cost of correcting an issue early in the process is much less than doing so later on
+1
+The cost of development is not spread equally over the phases
+3
+The Gantt chart was developed by Henry Gantt in the 1910's
+3
+The Gantt chart is typically used to create large scale projects, such as the Hoover Dam and the U.S. Interstate System

@@ -1,3 +1,8 @@
+/*Austin Van Braeckel
+*12/3/2018
+*A Study guide interface that interactively allows the user to browse information
+about the SDLC.
+*/
 
 import java.awt.Color;
 import java.io.*;

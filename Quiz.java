@@ -1,7 +1,8 @@
 /*Austin Van Braeckel
 12/2/2018
 A quiz interface that conducts an interactive multiple-choice quiz, also giving
-a grade
+a grade when the quiz is finished. Keeps track of the number of correct answers that
+the user gets, and offers the option to restart the quiz.
  */
 
 import javax.swing.JOptionPane;

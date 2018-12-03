@@ -1,7 +1,7 @@
 /*Austin Van Braeckel
 11/28/2018
-Represents a study note which includes an identification number, textual information,
-
+Represents a study note which includes an identification number and some 
+textual information.
  */
 
 /**
@@ -13,7 +13,7 @@ public class Note {
     private String text;
     private int IDNumber;
     
-    //Default onstructor
+    //Default constructor
     public Note(){
         text = "N/A";
         IDNumber = -1;

@@ -11,12 +11,12 @@
 public class Question {
 
     //variables
-    String question;
-    String correct;
-    String incorrect1;
-    String incorrect2;
-    String incorrect3;
-    int idNum;
+    private String question;
+    private String correct;
+    private String incorrect1;
+    private String incorrect2;
+    private String incorrect3;
+    private int idNum;
 
     /**
      * First constructor allows a question to be created with no input and preset values
@@ -152,5 +152,14 @@ public class Question {
      public String toString(){
          return "Question: " + question + "\nCorrect Answer: " + correct + "\nIncorrect Answer 1: " + incorrect1
                  + "\nIncorrect Answer 2: " + incorrect2 + "\nIncorrect Answer 3: " + incorrect3 + "\nID: " + idNum;
+     }
+     
+     /**
+      * Creates a clone of the Question object
+      * @return copy of the Question object
+      */
+     public Question clone(){
+         Question q = new Question(question, correct, incorrect1, incorrect2, incorrect3, idNum);
+         return q;
      }
 }

@@ -19,50 +19,58 @@ public class StudyGuide extends javax.swing.JFrame {
         initComponents();
         //fills the notes array with the information from the data file
         readNotes(notes);
-        for(Note n: notes){
-            System.out.println(n.toString());
-        }
+        //Displays the default notes (default seleciton of combo box)
+        displayNotes(1);
+        
     }
     
     //Initializes array for notes
     public Note[] notes;
+    //Initializes a variable for the second window
+    private Quiz secondWindow;
     
+    /**
+     * Reads the notes from the notes data file and stores all of them in an array
+     * of Note objects
+     * @param array of Note objects that is to be filled
+     */
     public void readNotes(Note[] array){
         try {//Read file
             FileReader fr = new FileReader("src\\notes.txt");
             BufferedReader br = new BufferedReader(fr);
             
-            //Create a note object for each record and store in an array list
-            ArrayList<Note> list = new ArrayList();
+            //Set-up variables to be used in the loop
             boolean eof = false;
             String sID, text;
             int ID;
-            
+            //Create array list to temporarily store the notes
+            ArrayList<Note> list = new ArrayList();
+        
+            //Repeats until the end of the file
             while(!eof){
-                sID = br.readLine();
-                if (sID == null){
+                sID = br.readLine(); //Reads the first line
+                if (sID == null){ //End of the file is reached
                     eof = true;
-                } else {
+                } else { //Not end of the file
                     ID = Integer.parseInt(sID);
                     text = br.readLine();
-                    //Creates note and adds to list
+                    //Creates note with the data file record and adds to list
                     Note n = new Note(ID, text);
                     list.add(n);
                 }   
             }//End while loop
             
-            //Fill array with the array list contents, now that the size is known
-            array = new Note[list.size()];
-            for(int i = 0; i < array.length; i++){
-                array[i] = list.get(i);
+            //Fill array with the values in the list
+            notes = new Note[list.size()];
+            for (int i = 0; i < notes.length; i++){
+                notes[i] = list.get(i); 
             }
             
         } catch (IOException e) {
-            System.out.println("Error: " + e);
+            System.out.println("Error: " + e); //Prints error message for reading the file
         }
     }
     
-    private Quiz secondWindow;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,7 +83,7 @@ public class StudyGuide extends javax.swing.JFrame {
 
         btnQuiz = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtNotes = new javax.swing.JTextArea();
         lblTitle = new javax.swing.JLabel();
         cbxCat = new javax.swing.JComboBox<>();
         lblCat = new javax.swing.JLabel();
@@ -99,16 +107,26 @@ public class StudyGuide extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtNotes.setEditable(false);
+        txtNotes.setColumns(1);
+        txtNotes.setLineWrap(true);
+        txtNotes.setRows(5);
+        txtNotes.setToolTipText("");
+        txtNotes.setWrapStyleWord(true);
+        txtNotes.setMaximumSize(new java.awt.Dimension(416, 230));
+        txtNotes.setMinimumSize(new java.awt.Dimension(416, 230));
+        txtNotes.setPreferredSize(new java.awt.Dimension(416, 230));
+        txtNotes.setVerifyInputWhenFocusTarget(false);
+        jScrollPane1.setViewportView(txtNotes);
+        txtNotes.getAccessibleContext().setAccessibleName("");
+        txtNotes.getAccessibleContext().setAccessibleParent(null);
 
         lblTitle.setFont(new java.awt.Font("Stencil Std", 0, 60)); // NOI18N
         lblTitle.setText("SDLC Study Guide");
 
         cbxCat.setBackground(new java.awt.Color(153, 153, 255));
         cbxCat.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
-        cbxCat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxCat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Category 1", "Category 2", "Category 3", "Category 4" }));
         cbxCat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbxCat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,18 +144,18 @@ public class StudyGuide extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addComponent(lblCat))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cbxCat, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addComponent(btnQuiz, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(lblTitle)))
+                        .addComponent(lblTitle))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(lblCat)))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -145,18 +163,19 @@ public class StudyGuide extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitle)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblCat)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbxCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 102, Short.MAX_VALUE)
                         .addComponent(btnQuiz, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(124, 124, 124))))
+                        .addGap(124, 124, 124))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())))
         );
 
         pack();
@@ -173,9 +192,40 @@ public class StudyGuide extends javax.swing.JFrame {
         secondWindow.setVisible(true);
     }//GEN-LAST:event_btnQuizActionPerformed
 
-    private void cbxCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCatActionPerformed
-        //Show the selected note
+    public void displayNotes(int num){
+        //Show the selected note categories
         
+        //Creates a temporary String to store the selected category's notes
+        String output = "";
+        //Loops through the array and adds any of the related notes to the output
+        for(Note n: notes){
+            if (n.getID() == num){
+                output += "\n  - " + n.getText();
+            }
+        } //end loop
+        
+        //Display the notes to the user
+        txtNotes.setText(output);
+        
+    }
+    
+    private void cbxCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCatActionPerformed
+        
+        //Set-up variable to determine the category
+        int catNum = 0;
+        //Determines which category the user wishes to see
+        if (cbxCat.getSelectedItem().equals(cbxCat.getItemAt(0))){
+            catNum = 1;
+        } else if (cbxCat.getSelectedItem().equals(cbxCat.getItemAt(1))) {
+            catNum = 2;
+        } else if (cbxCat.getSelectedItem().equals(cbxCat.getItemAt(2))) {
+            catNum = 3;
+        } else if (cbxCat.getSelectedItem().equals(cbxCat.getItemAt(3))) {
+            catNum = 4;
+        }
+        
+        //Display the notes of the specified category
+        displayNotes(catNum);
     }//GEN-LAST:event_cbxCatActionPerformed
 
     /**
@@ -217,8 +267,8 @@ public class StudyGuide extends javax.swing.JFrame {
     private javax.swing.JButton btnQuiz;
     private javax.swing.JComboBox<String> cbxCat;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblCat;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JTextArea txtNotes;
     // End of variables declaration//GEN-END:variables
 }

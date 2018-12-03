@@ -10,8 +10,8 @@ Represents a study note which includes an identification number, textual informa
  */
 public class Note {
     
-    private static String text;
-    private static int IDNumber;
+    private String text;
+    private int IDNumber;
     
     //Default onstructor
     public Note(){

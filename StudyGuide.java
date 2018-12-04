@@ -4,6 +4,7 @@
 about the SDLC.
 */
 
+import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.io.*;
 import java.util.ArrayList;
@@ -41,9 +42,13 @@ public class StudyGuide extends javax.swing.JFrame {
      */
     public void readNotes(Note[] array){
         try {//Read file
+            InputStream in = StudyGuide.class.getResourceAsStream("notes.txt");
+            InputStreamReader isr = new InputStreamReader(in);
+            BufferedReader br = new BufferedReader(isr);
+            /*
             FileReader fr = new FileReader("src\\notes.txt");
             BufferedReader br = new BufferedReader(fr);
-            
+            */
             //Set-up variables to be used in the loop
             boolean eof = false;
             String sID, text;
@@ -72,7 +77,7 @@ public class StudyGuide extends javax.swing.JFrame {
             }
             
         } catch (IOException e) {
-            System.out.println("Error: " + e); //Prints error message for reading the file
+            JOptionPane.showMessageDialog(null, "Error: " + e, "SDLC Study Guide - Alec & Austin", JOptionPane.ERROR_MESSAGE); //Prints error message for reading the file
         }
     }
     
@@ -124,14 +129,13 @@ public class StudyGuide extends javax.swing.JFrame {
         txtNotes.setVerifyInputWhenFocusTarget(false);
         jScrollPane1.setViewportView(txtNotes);
         txtNotes.getAccessibleContext().setAccessibleName("");
-        txtNotes.getAccessibleContext().setAccessibleParent(null);
 
         lblTitle.setFont(new java.awt.Font("Stencil Std", 0, 60)); // NOI18N
         lblTitle.setText("SDLC Study Guide");
 
         cbxCat.setBackground(new java.awt.Color(153, 153, 255));
         cbxCat.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
-        cbxCat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Category 1", "Category 2", "Category 3", "Category 4" }));
+        cbxCat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SDLC", "Systems", "Gantt Charts", "Waterfall Model" }));
         cbxCat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbxCat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

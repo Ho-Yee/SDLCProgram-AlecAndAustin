@@ -144,9 +144,14 @@ public class Quiz extends javax.swing.JFrame {
 
         //Try to read file
         try {
+            InputStream in = StudyGuide.class.getResourceAsStream("questions.txt");
+            InputStreamReader isr = new InputStreamReader(in);
+            BufferedReader br = new BufferedReader(isr);
+            /*
             FileReader fr = new FileReader("src\\questions.txt");
             BufferedReader br = new BufferedReader(fr);
-
+            */
+            
             //set-up variables for the loop
             boolean eof = false;
             String sIDNum, q, c, i1, i2, i3;
@@ -174,7 +179,7 @@ public class Quiz extends javax.swing.JFrame {
             }//End loop
 
         } catch (IOException e) {
-            System.out.println("Error: " + e); //Prints error message about reading the file
+           JOptionPane.showMessageDialog(null, "Error: " + e, "SDLC Study Guide - Alec & Austin", JOptionPane.ERROR_MESSAGE); //Prints error message about reading the file
         }
     }
 
@@ -340,6 +345,12 @@ public class Quiz extends javax.swing.JFrame {
         txtA.setRows(3);
         txtA.setWrapStyleWord(true);
         txtA.setBorder(null);
+        txtA.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtA.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtAMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(txtA);
 
         txtB.setEditable(false);
@@ -349,6 +360,12 @@ public class Quiz extends javax.swing.JFrame {
         txtB.setRows(3);
         txtB.setWrapStyleWord(true);
         txtB.setBorder(null);
+        txtB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtBMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(txtB);
 
         txtC.setEditable(false);
@@ -358,6 +375,12 @@ public class Quiz extends javax.swing.JFrame {
         txtC.setRows(3);
         txtC.setWrapStyleWord(true);
         txtC.setBorder(null);
+        txtC.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(txtC);
 
         txtD.setEditable(false);
@@ -367,6 +390,12 @@ public class Quiz extends javax.swing.JFrame {
         txtD.setRows(3);
         txtD.setWrapStyleWord(true);
         txtD.setBorder(null);
+        txtD.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtDMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(txtD);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -441,9 +470,8 @@ public class Quiz extends javax.swing.JFrame {
                             .addComponent(btnRestart, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnC)
-                                .addComponent(btnD))
+                            .addComponent(btnD)
+                            .addComponent(btnC)
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -471,10 +499,18 @@ public class Quiz extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestartActionPerformed
-        //Confirms that the user wishes to restart
-        int confirm = JOptionPane.showConfirmDialog(null,
+        //set-up variable to determine whether the user wishes to restart or not
+        int confirm;
+
+        //Confirms that the user wishes to restart unless it is the end of the quiz
+        if (btnAnswer.getText().equals("Finish!") && btnAnswer.isEnabled() == false){ //if the quiz is finished
+            confirm = 0; //Restarts without confirming, since the quiz is done
+        } else { //confirms with the user first
+            confirm = JOptionPane.showConfirmDialog(null,
                 "Are you sure you want to restart? You will lose your progress on this quiz, and will not be able to receive a grade.",
-                 "SDLC Study Guide - Alec & Austin", JOptionPane.YES_NO_OPTION);
+                "SDLC Study Guide - Alec & Austin", JOptionPane.YES_NO_OPTION);
+        }
+        
         if (confirm == 0) { //yes/true - Confirms that they'd like to restart
             //Disables restart button
             btnRestart.setEnabled(false);
@@ -548,11 +584,12 @@ public class Quiz extends javax.swing.JFrame {
             btnD.setEnabled(false);
             //Evaluate the user's answer
             evaluate(correctLetter);
-            if (questionsLeft > 0){
+            if (questionsLeft > 0) {
                 //set button's text to "Next!"
                 btnAnswer.setText("Next!");
             } else { //No questions left
                 btnAnswer.setText("Finish!");
+
             }
         } else if (btnAnswer.getText().equals("Next!")) { //the button says "Next!" and there are remaining questions
             //Displays next question
@@ -566,8 +603,50 @@ public class Quiz extends javax.swing.JFrame {
             btnAnswer.setText("Answer!");
         } else { //Button says "Finish!" and it is the end of the quiz
             //Calculate and display score to user
+            //Disables button
+            btnAnswer.setEnabled(false);
+            //Sets the multiple choice text fields to empty
+            txtA.setText(" ");
+            txtB.setText(" ");
+            txtC.setText(" ");
+            txtD.setText(" ");
+            //calculates and displays score to user
+            txtQuestion.setText("You got " + correctAnswers + "/10!\nYour score on the quiz: " + correctAnswers * 10 + "%!");
         }
     }//GEN-LAST:event_btnAnswerActionPerformed
+
+    private void txtAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAMouseClicked
+        if (btnA.isSelected()){ //if the button is already selected, deselect it
+            btnA.setSelected(false);
+        } else { //Otherwise, select the related button
+            btnA.setSelected(true);
+        }
+        
+    }//GEN-LAST:event_txtAMouseClicked
+
+    private void txtBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBMouseClicked
+        if (btnB.isSelected()){ //if the button is already selected, deselect it
+            btnB.setSelected(false);
+        } else { //Otherwise, select the related button
+            btnB.setSelected(true);
+        }
+    }//GEN-LAST:event_txtBMouseClicked
+
+    private void txtCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCMouseClicked
+        if (btnC.isSelected()){ //if the button is already selected, deselect it
+            btnC.setSelected(false);
+        } else { //Otherwise, select the related button
+            btnC.setSelected(true);
+        }
+    }//GEN-LAST:event_txtCMouseClicked
+
+    private void txtDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDMouseClicked
+        if (btnD.isSelected()){ //if the button is already selected, deselect it
+            btnD.setSelected(false);
+        } else { //Otherwise, select the related button
+            btnD.setSelected(true);
+        }
+    }//GEN-LAST:event_txtDMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

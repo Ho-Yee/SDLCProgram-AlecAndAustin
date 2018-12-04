@@ -135,9 +135,6 @@
           </Properties>
           <AccessibilityProperties>
             <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
-            <Property name="AccessibleContext.accessibleParent" type="javax.accessibility.Accessible" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="null"/>
-            </Property>
           </AccessibilityProperties>
         </Component>
       </SubComponents>
@@ -160,10 +157,10 @@
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
-            <StringItem index="0" value="Category 1"/>
-            <StringItem index="1" value="Category 2"/>
-            <StringItem index="2" value="Category 3"/>
-            <StringItem index="3" value="Category 4"/>
+            <StringItem index="0" value="SDLC"/>
+            <StringItem index="1" value="Systems"/>
+            <StringItem index="2" value="Gantt Charts"/>
+            <StringItem index="3" value="Waterfall Model"/>
           </StringArray>
         </Property>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
